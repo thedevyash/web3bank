@@ -6,6 +6,7 @@ module.exports={
       network_id: "*"
     }
   },
+
   contracts_directory: "./contracts",
   compilers: {
     solc: {

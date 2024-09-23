@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:web3bank/Deposit/deposit.dart';
+import 'package:web3bank/Withdraw/withdraw.dart';
 import 'package:web3bank/const/colors.dart';
+import 'package:web3bank/dashboard/bloc/dashboard_bloc.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -10,6 +14,13 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  final DashboardBloc dashboardBloc = DashboardBloc();
+  @override
+  void initState() {
+    dashboardBloc.add(DashboardInitialFetchEvent());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +91,13 @@ class _DashboardPageState extends State<DashboardPage> {
                               style: TextButton.styleFrom(
                                   backgroundColor:
                                       Color.fromARGB(255, 177, 239, 209)),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                      builder: (context) => DepositPage(),
+                                    ));
+                              },
                               child: Padding(
                                 padding: const EdgeInsets.all(3.0),
                                 child: Text(
@@ -98,7 +115,13 @@ class _DashboardPageState extends State<DashboardPage> {
                               style: TextButton.styleFrom(
                                   backgroundColor:
                                       Color.fromARGB(255, 252, 204, 204)),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                      builder: (context) => WithdrawPage(),
+                                    ));
+                              },
                               child: Padding(
                                 padding: const EdgeInsets.all(3.0),
                                 child: Text(

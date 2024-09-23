@@ -11,7 +11,7 @@ contract ExpenseManagerContract {
     }
    Transaction[] public transactions;
 
-    constructor() public {
+    constructor() {
         owner=msg.sender;
     }
   modifier onlyOwner(){
