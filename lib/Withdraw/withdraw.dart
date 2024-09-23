@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:web3bank/dashboard/bloc/dashboard_bloc.dart';
+import 'package:web3bank/models/TransactionModel.dart';
 
 class WithdrawPage extends StatefulWidget {
-  const WithdrawPage({super.key});
+  DashboardBloc dashboardBloc;
+  WithdrawPage({super.key, required this.dashboardBloc});
 
   @override
   State<WithdrawPage> createState() => _WithdrawPageState();
@@ -13,6 +16,12 @@ class _WithdrawPageState extends State<WithdrawPage> {
   final TextEditingController addressController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
   final TextEditingController reasonController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    addressController.text = "0x82f99FF41a311490a7445D68Cf2888967265E675";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +62,16 @@ class _WithdrawPageState extends State<WithdrawPage> {
               child: TextButton(
                   style: TextButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 252, 204, 204)),
-                  onPressed: () {},
+                  onPressed: () {
+                    widget.dashboardBloc.add(DashboardWithdrawEvent(
+                        transactionModel: TransactionModel(
+                            addressController.text,
+                            int.parse(amountController.text),
+                            reasonController.text,
+                            DateTime.now(),
+                            0)));
+                    Navigator.pop(context);
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(3.0),
                     child: Text(

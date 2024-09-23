@@ -4,3 +4,17 @@ part of 'dashboard_bloc.dart';
 sealed class DashboardEvent {}
 
 class DashboardInitialFetchEvent extends DashboardEvent {}
+
+class DashboardDepositEvent extends DashboardEvent {
+  final TransactionModel transactionModel;
+  DashboardDepositEvent({
+    required this.transactionModel,
+  });
+}
+
+class DashboardWithdrawEvent extends DashboardEvent {
+  final TransactionModel transactionModel;
+  DashboardWithdrawEvent({
+    required this.transactionModel,
+  });
+}
